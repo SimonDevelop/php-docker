@@ -1,0 +1,49 @@
+{
+  "name": "simondevelop/php-docker",
+  "description": "Php library for managing docker and its commands.",
+  "type": "library",
+  "keywords": [
+    "docker",
+    "container",
+    "command",
+    "managing"
+  ],
+  "homepage": "https://github.com/SimonDevelop/php-docker",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "SimonDevelop",
+      "email": "contact@simon-micheneau.fr"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "SimonDevelop\\": "src/",
+      "SimonDevelop\\Test\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.1",
+    "phpunit/phpunit": "~6.5",
+    "phpstan/phpstan": "^0.9.2"
+  },
+  "scripts": {
+    "phpcs": "phpcs -s",
+    "phpstan-src": "phpstan analyse -l 5 src",
+    "phpstan-tests": "phpstan analyse -l 5 tests",
+    "phpstan": [
+      "@phpstan-src",
+      "@phpstan-tests"
+    ],
+    "phpunit": "phpunit --colors",
+    "test": [
+      "@phpunit",
+      "@phpcs",
+      "@phpstan"
+    ]
+  }
+}
