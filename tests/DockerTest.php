@@ -31,6 +31,9 @@ class DockerTest extends TestCase
         $this->assertEquals("nginx:latest", $Docker->getImage());
         $this->assertEquals(["8080" => "80"], $Docker->getPorts());
         $this->assertEquals(["/some/content" => "/usr/share/nginx/html"], $Docker->getVolumes());
+        $this->assertEquals("", $Docker->getName());
+        $this->assertEquals([], $Docker->getEnv());
+        $this->assertEquals([], $Docker->getArg());
     }
 
     /**
@@ -45,15 +48,31 @@ class DockerTest extends TestCase
         $this->assertEquals("nginx:latest", $Docker->getImage());
         $this->assertEquals(["8080" => "80"], $Docker->getPorts());
         $this->assertEquals(["/some/content" => "/usr/share/nginx/html"], $Docker->getVolumes());
+        $this->assertEquals("", $Docker->getName());
+        $this->assertEquals([], $Docker->getEnv());
+        $this->assertEquals([], $Docker->getArg());
+
+        $Docker->addEnv(["MYSQL_PASSWORD" => "root"]);
+        $Docker->addArg(["SSH_PASSWORD" => "root"]);
+        $this->assertEquals(["MYSQL_PASSWORD" => "root"], $Docker->getEnv());
+        $this->assertEquals(["SSH_PASSWORD" => "root"], $Docker->getArg());
 
         $Docker->removePorts(["8080" => "80"]);
         $Docker->removeVolumes(["/some/content" => "/usr/share/nginx/html"]);
         $this->assertEquals([], $Docker->getPorts());
         $this->assertEquals([], $Docker->getVolumes());
 
+        $Docker->removeEnv(["MYSQL_PASSWORD" => "root"]);
+        $Docker->removeArg(["SSH_PASSWORD" => "root"]);
+        $this->assertEquals([], $Docker->getEnv());
+        $this->assertEquals([], $Docker->getArg());
+
         $Docker->addPorts(["8080" => "80"]);
         $Docker->addVolumes(["/some/content" => "/usr/share/nginx/html"]);
         $this->assertEquals(["8080" => "80"], $Docker->getPorts());
         $this->assertEquals(["/some/content" => "/usr/share/nginx/html"], $Docker->getVolumes());
+
+        $Docker->setName("test");
+        $this->assertEquals("test", $Docker->getName());
     }
 }
