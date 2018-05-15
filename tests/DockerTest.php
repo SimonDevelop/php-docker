@@ -78,6 +78,10 @@ class DockerTest extends TestCase
         $this->assertEquals(false, $Docker->getAutoPort());
         $Docker->setAutoPort(true);
         $this->assertEquals(true, $Docker->getAutoPort());
+
+        $this->assertEquals("", $Docker->getRestart());
+        $Docker->setRestart("always");
+        $this->assertEquals("always", $Docker->getRestart());
     }
 
     /**
@@ -108,14 +112,15 @@ class DockerTest extends TestCase
             "27115/udp" => "27015/udp"
         ], $Docker->getPorts());
         $Docker->setVolumes([
-            "/home/test" => "/root"
+            "/home" => "/root"
         ]);
         $this->assertEquals([
-            "/home/test" => "/root"
+            "/home" => "/root"
         ], $Docker->getVolumes());
         $Docker->setAutoPort(true);
+        $Docker->setRestart("always");
         $this->assertEquals(
-            "docker run -d -P -v /home/test:/root -p 27115:27015 -p 27115:27015/udp --name test steam/01",
+            "docker run -d -P -v /home:/root -p 27115:27015 -p 27115:27015/udp --restart always --name test steam/01",
             $Docker->run()
         );
     }
