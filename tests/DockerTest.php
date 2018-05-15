@@ -74,5 +74,49 @@ class DockerTest extends TestCase
 
         $Docker->setName("test");
         $this->assertEquals("test", $Docker->getName());
+
+        $this->assertEquals(false, $Docker->getAutoPort());
+        $Docker->setAutoPort(true);
+        $this->assertEquals(true, $Docker->getAutoPort());
+    }
+
+    /**
+     * Build function test
+     * @depends testInitConstructor
+     */
+    public function testBuild($Docker)
+    {
+        $Docker->setTag("steam/01");
+        $this->assertEquals("nginx:latest", $Docker->getImage());
+        $Docker->addArg(["SSH_PASSWORD" => "root"]);
+        $this->assertEquals("docker build -t steam/01 --build-arg SSH_PASSWORD=root .", $Docker->build());
+    }
+
+    /**
+     * Run function test
+     * @depends testInitConstructor
+     */
+    public function testRun($Docker)
+    {
+        $this->assertEquals("steam/01", $Docker->getImage());
+        $Docker->setPorts([
+            "27115" => "27015",
+            "27115/udp" => "27015/udp"
+        ]);
+        $this->assertEquals([
+            "27115" => "27015",
+            "27115/udp" => "27015/udp"
+        ], $Docker->getPorts());
+        $Docker->setVolumes([
+            "/home/test" => "/root"
+        ]);
+        $this->assertEquals([
+            "/home/test" => "/root"
+        ], $Docker->getVolumes());
+        $Docker->setAutoPort(true);
+        $this->assertEquals(
+            "docker run -d -P -v /home/test:/root -p 27115:27015 -p 27115:27015/udp --name test steam/01",
+            $Docker->run()
+        );
     }
 }

@@ -38,6 +38,11 @@ class Docker
     private $ports;
 
     /**
+    * @var bool Automatical port option
+    */
+    private $autoPort;
+
+    /**
      * @var array Volumes list
      */
     private $volumes;
@@ -66,6 +71,7 @@ class Docker
         $this->volumes = $volumes;
         $this->env = [];
         $this->arg = [];
+        $this->autoPort = false;
     }
 
     public function build(string $path = null)
@@ -85,10 +91,41 @@ class Docker
             foreach ($this->arg as $k => $v) {
                 $command .= "--build-arg ".$k."=".$v." ";
             }
+            $this->image = $this->tag;
             return $command.$absolut_path;
         }
     }
 
+    public function run(string $image = null)
+    {
+        if ($image == null || $image == "") {
+            if ($this->image == null || $this->image == "") {
+                throw new \Exception("Unable build:
+                Need the 'image' property or a correct 'image' parameter before calling the 'run' method");
+            } else {
+                $image = $this->image;
+            }
+        }
+        $command = "docker run -d ";
+        if ($this->autoPort == true) {
+            $command .= "-P ";
+        }
+        foreach ($this->volumes as $k => $v) {
+            $command .= "-v ".$k.":".$v." ";
+        }
+        foreach ($this->ports as $k => $v) {
+            $key = str_replace("/udp", "", str_replace("/tcp", "", $k));
+            $command .= "-p ".$key.":".$v." ";
+        }
+        foreach ($this->env as $k => $v) {
+            $command .= "-e ".$k."=".$v." ";
+        }
+        if (!empty($this->name)) {
+            $command .= "--name ".$this->name." ";
+        }
+        $command .= $image;
+        return $command;
+    }
 
     /**
      * @return string Name of docker
@@ -318,5 +355,23 @@ class Docker
             }
         }
         return $this->arg;
+    }
+
+    /**
+     * @return bool AutoPort of docker
+     */
+    public function getAutoPort()
+    {
+        return $this->autoPort;
+    }
+
+    /**
+     * @param bool $autoPort AutoPort of docker
+     * @return bool AutoPort of docker
+     */
+    public function setAutoPort(bool $autoPort)
+    {
+        $this->autoPort = $autoPort;
+        return $this->autoPort;
     }
 }
