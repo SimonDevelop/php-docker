@@ -1,6 +1,6 @@
 # Docker references
 
-### __constructor (string $image = "", array $ports = [], array $volumes = [])
+### __constructor (string $image, array $ports = [], array $volumes = [])
 ```php
 <?php
 
@@ -13,7 +13,8 @@ $volumes = [ // optionnal
     "/some/content" => "/usr/share/nginx/html"
 ];
 
-$obj = new Docker($image, ports, $volumes);
+$obj = new Docker($image, $ports, $volumes);
 ```
+
 
 ### Work in progress...
