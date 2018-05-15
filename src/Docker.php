@@ -43,9 +43,19 @@ class Docker
     private $autoPort;
 
     /**
+    * @var string restart option
+    */
+    private $restart;
+
+    /**
      * @var array Volumes list
      */
     private $volumes;
+
+    /**
+     * @var array Links list
+     */
+    private $links;
 
     /**
      * @var array environnement variables list
@@ -69,9 +79,11 @@ class Docker
         $this->image = $image;
         $this->ports = $ports;
         $this->volumes = $volumes;
+        $this->links = [];
         $this->env = [];
         $this->arg = [];
         $this->autoPort = false;
+        $this->restart = "";
     }
 
     public function build(string $path = null)
@@ -110,6 +122,9 @@ class Docker
         if ($this->autoPort == true) {
             $command .= "-P ";
         }
+        foreach ($this->links as $k => $v) {
+            $command .= "--link ".$k.":".$v." ";
+        }
         foreach ($this->volumes as $k => $v) {
             $command .= "-v ".$k.":".$v." ";
         }
@@ -119,6 +134,9 @@ class Docker
         }
         foreach ($this->env as $k => $v) {
             $command .= "-e ".$k."=".$v." ";
+        }
+        if (!empty($this->restart)) {
+            $command .= "--restart ".$this->restart." ";
         }
         if (!empty($this->name)) {
             $command .= "--name ".$this->name." ";
@@ -270,6 +288,50 @@ class Docker
     }
 
     /**
+     * @return array Links list of docker
+     */
+    public function getLinks()
+    {
+        return $this->links;
+    }
+
+    /**
+     * @param array $links Links list of docker
+     * @return array Links list of docker
+     */
+    public function setLinks(array $links)
+    {
+        $this->links = $links;
+        return $this->links;
+    }
+
+    /**
+     * @param array $links Links list of docker
+     * @return array Links list of docker
+     */
+    public function addLinks(array $links)
+    {
+        foreach ($links as $k => $v) {
+            $this->links[$k] = $v;
+        }
+        return $this->links;
+    }
+
+    /**
+     * @param array $links Links list of docker
+     * @return array Links list of docker
+     */
+    public function removeLinks(array $links)
+    {
+        foreach ($links as $k => $v) {
+            if (isset($this->links[$k])) {
+                unset($this->links[$k]);
+            }
+        }
+        return $this->links;
+    }
+
+    /**
      * @return array Env list of docker
      */
     public function getEnv()
@@ -358,7 +420,7 @@ class Docker
     }
 
     /**
-     * @return bool AutoPort of docker
+     * @return bool AutoPort of option docker
      */
     public function getAutoPort()
     {
@@ -366,12 +428,30 @@ class Docker
     }
 
     /**
-     * @param bool $autoPort AutoPort of docker
-     * @return bool AutoPort of docker
+     * @param bool $autoPort AutoPort option of docker
+     * @return bool AutoPort option of docker
      */
     public function setAutoPort(bool $autoPort)
     {
         $this->autoPort = $autoPort;
         return $this->autoPort;
+    }
+
+    /**
+     * @return string Restart option option of docker
+     */
+    public function getRestart()
+    {
+        return $this->restart;
+    }
+
+    /**
+     * @param string $restart Restart option of docker
+     * @return string Restart option of docker
+     */
+    public function setRestart(string $restart)
+    {
+        $this->restart = $restart;
+        return $this->restart;
     }
 }
