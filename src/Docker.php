@@ -43,6 +43,11 @@ class Docker
     private $autoPort;
 
     /**
+    * @var bool Interactive option (STDIN open)
+    */
+    private $interactive;
+
+    /**
     * @var string restart option
     */
     private $restart;
@@ -88,6 +93,7 @@ class Docker
         $this->env = [];
         $this->arg = [];
         $this->autoPort = false;
+        $this->interactive = false;
         $this->restart = "";
         $this->memory = 0;
     }
@@ -125,6 +131,9 @@ class Docker
             }
         }
         $command = "docker run -d ";
+        if ($this->interactive == true) {
+            $command .= "-i ";
+        }
         if ($this->autoPort == true) {
             $command .= "-P ";
         }
@@ -447,6 +456,24 @@ class Docker
     }
 
     /**
+     * @return bool Interactive of option docker
+     */
+    public function getInteractive()
+    {
+        return $this->interactive;
+    }
+
+    /**
+     * @param bool $interactive Interactive option of docker
+     * @return bool Interactive option of docker
+     */
+    public function setInteractive(bool $interactive)
+    {
+        $this->interactive = $interactive;
+        return $this->interactive;
+    }
+
+    /**
      * @return string Restart option of docker
      */
     public function getRestart()
@@ -463,7 +490,6 @@ class Docker
         $this->restart = $restart;
         return $this->restart;
     }
-
 
     /**
      * @return int Memory option of docker
