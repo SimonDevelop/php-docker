@@ -79,6 +79,12 @@ class DockerTest extends TestCase
         $Docker->setAutoPort(true);
         $this->assertEquals(true, $Docker->getAutoPort());
 
+        $this->assertEquals(false, $Docker->getInteractive());
+        $Docker->setInteractive(true);
+        $this->assertEquals(true, $Docker->getInteractive());
+        $Docker->setInteractive(false);
+        $this->assertEquals(false, $Docker->getInteractive());
+
         $this->assertEquals("", $Docker->getRestart());
         $Docker->setRestart("always");
         $this->assertEquals("always", $Docker->getRestart());
