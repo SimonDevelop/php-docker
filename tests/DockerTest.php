@@ -82,6 +82,10 @@ class DockerTest extends TestCase
         $this->assertEquals("", $Docker->getRestart());
         $Docker->setRestart("always");
         $this->assertEquals("always", $Docker->getRestart());
+
+        $this->assertEquals(0, $Docker->getMemory());
+        $Docker->setMemory(1024);
+        $this->assertEquals(1024, $Docker->getMemory());
     }
 
     /**

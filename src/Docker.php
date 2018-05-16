@@ -48,6 +48,11 @@ class Docker
     private $restart;
 
     /**
+    * @var int memory option
+    */
+    private $memory;
+
+    /**
      * @var array Volumes list
      */
     private $volumes;
@@ -84,6 +89,7 @@ class Docker
         $this->arg = [];
         $this->autoPort = false;
         $this->restart = "";
+        $this->memory = 0;
     }
 
     public function build(string $path = null)
@@ -134,6 +140,9 @@ class Docker
         }
         foreach ($this->env as $k => $v) {
             $command .= "-e ".$k."=".$v." ";
+        }
+        if (is_int($this->memory) && $this->memory > 0) {
+            $command .= "-m ".$this->memory."M ";
         }
         if (!empty($this->restart)) {
             $command .= "--restart ".$this->restart." ";
@@ -438,7 +447,7 @@ class Docker
     }
 
     /**
-     * @return string Restart option option of docker
+     * @return string Restart option of docker
      */
     public function getRestart()
     {
@@ -453,5 +462,24 @@ class Docker
     {
         $this->restart = $restart;
         return $this->restart;
+    }
+
+
+    /**
+     * @return int Memory option of docker
+     */
+    public function getMemory()
+    {
+        return $this->memory;
+    }
+
+    /**
+     * @param int $memory Memory option of docker
+     * @return int Memory option of docker
+     */
+    public function setMemory(int $memory)
+    {
+        $this->memory = $memory;
+        return $this->memory;
     }
 }

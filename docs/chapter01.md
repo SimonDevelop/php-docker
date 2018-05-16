@@ -4,21 +4,21 @@
 ```php
 <?php
 $docker->setName("nginx-test");
-// Name for the docker container
+// Name for the docker container (default => "")
 ```
 
 ### setTag (string $name)
 ```php
 <?php
 $docker->setTag("USERNAME/nginx-test");
-// Tag for the docker container
+// Tag for the docker container  (default => "")
 ```
 
 ### setImage (string $image)
 ```php
 <?php
 $docker->setImage("nginx:latest");
-// Image for the docker container
+// Image for the docker container (default => "")
 ```
 
 ---
@@ -27,14 +27,21 @@ $docker->setImage("nginx:latest");
 ```php
 <?php
 $docker->setAutoPort(true);
-// Parameter for the automatical set ports expose for the docker container
+// Parameter for the automatical set ports expose for the docker container (default => false)
 ```
 
 ### setRestart (string $restart)
 ```php
 <?php
 $docker->setRestart("always");
-// Parameter for the restart flag for the docker container
+// Parameter for the restart flag for the docker container (default => null)
+```
+
+### setMemory (int $memory)
+```php
+<?php
+$docker->setMemory(1024); // Mo
+// Parameter for the memory flag for the docker container (default => 0)
 ```
 
 ---
@@ -45,7 +52,7 @@ $docker->setRestart("always");
 $docker->setPorts([
     "8080" => "80"
 ]);
-// Ports list for the docker container
+// Ports list for the docker container (default => [])
 ```
 
 ### addPorts (array $ports)
@@ -74,7 +81,7 @@ $docker->removePorts([
 $docker->setVolumes([
     "/my/own/datadir" => "/var/lib/mysql"
 ]);
-// Volumes list for the docker container
+// Volumes list for the docker container (default => [])
 ```
 
 ### addVolumes (array $volumes)
@@ -103,7 +110,7 @@ $docker->removeVolumes([
 $docker->setLinks([
     "mysql" => "db"
 ]);
-// Links list for the docker container
+// Links list for the docker container (default => [])
 ```
 
 ### addLinks (array $links)
@@ -132,7 +139,7 @@ $docker->removeLinks([
 $docker->setArg([
     "SSH_PASSWORD" => "root"
 ]);
-// Arg list for the docker container
+// Arg list for the docker container (default => [])
 ```
 
 ### addArg (array $arg)
@@ -161,7 +168,7 @@ $docker->removeArg([
 $docker->setEnv([
     "SSH_PASSWORD" => "root"
 ]);
-// Env list for the docker container
+// Env list for the docker container (default => [])
 ```
 
 ### addEnv (array $env)
