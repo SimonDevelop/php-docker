@@ -2,6 +2,7 @@
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg)](https://php.net/)
 [![Build Status](https://travis-ci.org/SimonDevelop/array-organize.svg?branch=master)](https://travis-ci.org/SimonDevelop/php-docker)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/SimonDevelop/php-docker/blob/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSimonDevelop%2Fphp-docker.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSimonDevelop%2Fphp-docker?ref=badge_shield)
 # php-docker
 Php library for managing docker and its commands.
 
@@ -35,3 +36,7 @@ Check this [docs](https://github.com/SimonDevelop/php-docker/blob/master/docs/in
 - Check the [Code of Conduct](https://github.com/SimonDevelop/php-docker/blob/master/.github/CODE_OF_CONDUCT.md)
 - Check the [Contributing file](https://github.com/SimonDevelop/php-docker/blob/master/.github/CONTRIBUTING.md)
 - Check the [Pull Request Template](https://github.com/SimonDevelop/php-docker/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSimonDevelop%2Fphp-docker.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSimonDevelop%2Fphp-docker?ref=badge_large)
