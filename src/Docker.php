@@ -98,6 +98,10 @@ class Docker
         $this->memory = 0;
     }
 
+    /**
+     * @param string $path path to dockerfile for build
+     * @return string return command
+     */
     public function build(string $path = null)
     {
         if ($this->tag == "") {
@@ -120,6 +124,10 @@ class Docker
         }
     }
 
+    /**
+     * @param string $image name of image to run
+     * @return string return command
+     */
     public function run(string $image = null)
     {
         if ($image == null || $image == "") {
