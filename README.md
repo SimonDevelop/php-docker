@@ -1,6 +1,7 @@
 [![version](https://img.shields.io/badge/Version-0.0.3-brightgreen.svg)](https://github.com/SimonDevelop/php-docker/releases/tag/0.0.3)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg)](https://php.net/)
-[![Build Status](https://travis-ci.org/SimonDevelop/array-organize.svg?branch=master)](https://travis-ci.org/SimonDevelop/php-docker)
+[![Build Status](https://travis-ci.org/SimonDevelop/php-docker.svg?branch=master)](https://travis-ci.org/SimonDevelop/php-docker)
+[![Github Actions PHP](https://github.com/SimonDevelop/php-docker/workflows/PHP/badge.svg)](https://github.com/SimonDevelop/php-docker/actions)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/SimonDevelop/php-docker/blob/master/LICENSE)
 # php-docker
 Php library for managing docker and its commands.
