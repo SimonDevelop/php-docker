@@ -1,6 +1,5 @@
-[![version](https://img.shields.io/badge/Version-0.0.3-brightgreen.svg)](https://github.com/SimonDevelop/php-docker/releases/tag/0.0.3)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg)](https://php.net/)
-[![Build Status](https://travis-ci.org/SimonDevelop/php-docker.svg?branch=master)](https://travis-ci.org/SimonDevelop/php-docker)
+[![version](https://img.shields.io/badge/Version-0.1.0-brightgreen.svg)](https://github.com/SimonDevelop/php-docker/releases/tag/0.1.0)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
 [![Github Actions PHP](https://github.com/SimonDevelop/php-docker/workflows/PHP/badge.svg)](https://github.com/SimonDevelop/php-docker/actions)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/SimonDevelop/php-docker/blob/master/LICENSE)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSimonDevelop%2Fphp-docker.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSimonDevelop%2Fphp-docker?ref=badge_shield)

@@ -2,7 +2,7 @@
 
 Hey Contributor! :smiley_cat:
 
-All contributions to array-organize are very much encouraged, and we do our best to make it as welcoming and simple as possible.
+All contributions to php-docker are very much encouraged, and we do our best to make it as welcoming and simple as possible.
 
 ## Coding Standards
 
